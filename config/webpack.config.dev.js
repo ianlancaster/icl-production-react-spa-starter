@@ -84,6 +84,7 @@ module.exports = {
     // `web` extension prefixes have been added for better support
     // for React Native Web.
     extensions: [
+      '.scss',
       '.mjs',
       '.web.ts',
       '.ts',
@@ -174,10 +175,11 @@ module.exports = {
             use: [
               require.resolve('style-loader'),
               {
-                loader: require.resolve('css-loader'),
+                loader: require.resolve('typings-for-css-modules-loader'),
                 options: {
                   importLoaders: 1,
                   modules: true,
+                  namedExport: true,
                   localIdentName: '[name]__[local]___[hash:base64:5]'
                 }
               },
