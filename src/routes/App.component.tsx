@@ -1,5 +1,6 @@
 import * as React from 'react';
-import * as styles from './App.styles.scss'; 
+import * as styles from './App.styles.scss';
+import { logoSpin } from './App.animations';
 
 const logo = require('assets/images/logo.svg');
 
@@ -8,7 +9,12 @@ class App extends React.Component {
     return (
       <div className={styles.app}>
         <header className={styles.header}>
-          <img src={logo} className={styles.logo} alt="logo" />
+          <img
+            src={logo}
+            className={styles.logo}
+            style={{ ...logoSpin }}
+            alt="logo"
+          />
           <h1 className={styles.title}>Welcome to React</h1>
         </header>
         <p className={styles.intro}>
