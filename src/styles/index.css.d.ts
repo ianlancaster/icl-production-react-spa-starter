@@ -2,4 +2,4 @@ export interface IIndexCss {
 
 }
 
-export const locals: IIndexCss;
+export const locals: IIndexCss

@@ -1,4 +1,4 @@
-import { createReactAnimation } from 'services/styleHelpers';
+import { createReactAnimation } from 'services/styleHelpers'
 
 export const logoSpin = {
   animationName: createReactAnimation(`
@@ -8,4 +8,4 @@ export const logoSpin = {
   animationDuration: '20s',
   animationTimingFunction: 'linear',
   animationIterationCount: 'infinite'
-};
+}

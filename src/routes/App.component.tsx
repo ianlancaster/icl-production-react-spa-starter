@@ -1,8 +1,8 @@
-import * as React from 'react';
-import * as styles from './App.styles.scss';
-import { logoSpin } from './App.animations';
+import * as React from 'react'
+import * as styles from './App.styles.scss'
+import { logoSpin } from './App.animations'
 
-const logo = require('assets/images/logo.svg');
+const logo = require('assets/images/logo.svg')
 
 class App extends React.Component {
   render() {
@@ -21,8 +21,8 @@ class App extends React.Component {
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
