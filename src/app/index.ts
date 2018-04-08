@@ -1,1 +1,2 @@
-module.exports = require('./App.component')
+import App from './App.container'
+export default App

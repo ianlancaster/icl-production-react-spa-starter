@@ -49,15 +49,25 @@
 
 // export default reducer
 
-const initialState = {}
+import { StoreState } from 'types'
+import updaters from 'actions/updaters'
 
-export default (state = initialState, action) => {
+const initialState = {
+  counter: 0
+}
+
+interface Action {
+  type: String,
+  payload: any
+}
+
+export default (state: StoreState = initialState, action: Action) => {
   switch (action.type) {
-    case 'ACTION_TYPE':
+    case updaters.UPDATE_COUNTER:
+      console.log('action.payload :  : ', action.payload)
       return {
         ...state,
-        something: 'value',
-        somethingElse: action.payload,
+        counter: action.payload,
       }
 
     default:

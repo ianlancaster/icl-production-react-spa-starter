@@ -1,27 +1,21 @@
-import { createStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware from 'redux-saga'
-import rootSaga from 'sagas'
 import createHistory from 'history/createBrowserHistory'
+import { createStore, applyMiddleware, compose } from 'redux'
+
+import rootSaga from 'sagas'
 import stateTree from './stateTree'
+import { StoreState } from 'types'
 
 export const history = createHistory()
 const sagaMiddleware = createSagaMiddleware()
-
-const initialState = {}
 
 const enhancers = []
 const middleware = [
   sagaMiddleware
 ]
 
-declare global {
-  interface Window {
-    devToolsExtension: Function
-  }
-}
-
 if (process.env.NODE_ENV === 'development') {
-  const devToolsExtension = window.devToolsExtension // tslint:disable-line
+  const devToolsExtension = window.devToolsExtension
 
   if (typeof devToolsExtension === 'function') {
     enhancers.push(devToolsExtension())
@@ -33,9 +27,8 @@ const composedEnhancers = compose(
   ...enhancers
 )
 
-const store = createStore(
+const store = createStore<StoreState, any, any>(
   stateTree,
-  initialState,
   composedEnhancers
 )
 

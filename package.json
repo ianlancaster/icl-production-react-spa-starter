@@ -41,6 +41,7 @@
     "react-redux": "^5.0.7",
     "redux": "4.0.0-beta.1",
     "redux-saga": "^0.16.0",
+    "redux-saga-router": "^2.2.0",
     "sass-loader": "^6.0.7",
     "source-map-loader": "^0.2.1",
     "string-hash": "^1.1.3",

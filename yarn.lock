@@ -2922,6 +2922,10 @@ fsevents@^1.0.0, fsevents@^1.1.1, fsevents@^1.1.2:
     nan "^2.3.0"
     node-pre-gyp "^0.6.36"
 
+fsm-iterator@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/fsm-iterator/-/fsm-iterator-1.1.0.tgz#337de45de19eb205788cf02e3a955ec206760dec"
+
 fstream-ignore@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/fstream-ignore/-/fstream-ignore-1.0.5.tgz#9c31dae34767018fe1d249b24dada67d092da105"
@@ -6246,6 +6250,14 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
+redux-saga-router@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/redux-saga-router/-/redux-saga-router-2.2.0.tgz#df41ad56f8f5ac151beff1683a5723572e6248f5"
+  dependencies:
+    fsm-iterator "^1.0.0"
+    history "^4.7.2"
+    ruta3 "^2.0.1"
+
 redux-saga@^0.16.0:
   version "0.16.0"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.0.tgz#0a231db0a1489301dd980f6f2f88d8ced418f724"
@@ -6551,6 +6563,10 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   resolved "https://registry.yarnpkg.com/run-queue/-/run-queue-1.0.3.tgz#e848396f057d223f24386924618e25694161ec47"
   dependencies:
     aproba "^1.1.1"
+
+ruta3@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ruta3/-/ruta3-2.0.1.tgz#b40efa789e6cfce0abf3a5a38bf64cb45abdc18e"
 
 rx-lite-aggregates@^4.0.8:
   version "4.0.8"
