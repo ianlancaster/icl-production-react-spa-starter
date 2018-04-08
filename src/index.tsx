@@ -1,11 +1,26 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import App from 'routes/App.component'
-import registerServiceWorker from 'services/cache/registerServiceWorker'
-import 'styles/index.css'
+import CssBaseline from 'material-ui/CssBaseline'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { MuiThemeProvider } from 'material-ui/styles'
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root') as HTMLElement
+import 'styles/index.scss'
+import App from 'app/App.component'
+import theme from 'styles/materialTheme'
+import registerServiceWorker from 'services/cache/registerServiceWorker'
+import store from 'app/store'
+
+const entryPoint = document.querySelector('#root')
+
+render(
+  <Provider store={store}>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline>
+        <App />
+      </CssBaseline>
+    </MuiThemeProvider>
+  </Provider>,
+  entryPoint
 )
+
 registerServiceWorker()
