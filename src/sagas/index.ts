@@ -1,5 +1,5 @@
 import * as triggers from 'actions/triggers'
-import { updateCounter } from 'actions/updaters'
+import * as updaters from 'actions/updaters'
 import { put, takeLatest, all } from 'redux-saga/effects'
 
 // ------------------------------------
@@ -16,7 +16,7 @@ function* watchUserActions() {
   yield takeLatest(
     triggers.CLICK_INCREMENT_BUTTON,
     yield (action: Action) => all([
-      put(updateCounter(action.payload, action))
+      put(updaters.updateCounter({ action }))
     ])
   )
 }

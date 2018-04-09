@@ -6,7 +6,7 @@ import { Button } from 'material-ui'
 const logo = require('assets/images/logo.svg')
 
 export interface Props {
-  clickIncrementButton: (payload: number) => Action,
+  clickIncrementButton: (details: ActionDetails) => Action,
   counter: number
 }
 
@@ -28,7 +28,10 @@ class App extends React.Component<Props, object> {
         <Button
           variant='raised'
           color='primary'
-          onClick={() => clickIncrementButton(counter + 1)}
+          onClick={() => clickIncrementButton({
+            payload: counter + 1,
+            context: { route: '/' }
+          })}
           style={{ margin: 20 }}
         >
           helllloooo

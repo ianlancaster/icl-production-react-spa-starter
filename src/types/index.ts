@@ -12,9 +12,13 @@ declare global {
     devToolsExtension: Function
   }
 
-  interface Action extends ReduxAction {
+  interface ActionDetails {
     payload?: any
     context?: object
+  }
+  
+  interface Action extends ReduxAction, ActionDetails {
+    trigger?: object
   }
 
   interface ActionCreator extends ReduxActionCreator<Action> {}

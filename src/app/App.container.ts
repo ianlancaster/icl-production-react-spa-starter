@@ -9,7 +9,8 @@ const mapStateToProps = (state: StoreState) => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  clickIncrementButton: (payload: number) => dispatch(clickIncrementButton(payload))
+  clickIncrementButton: (details: ActionDetails) =>
+    dispatch(clickIncrementButton(details))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
