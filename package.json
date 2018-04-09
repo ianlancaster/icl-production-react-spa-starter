@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/history": "^4.6.2",
     "@types/react-redux": "^5.0.15",
+    "@types/react-router-dom": "^4.2.6",
     "autoprefixer": "7.1.6",
     "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
@@ -39,6 +40,7 @@
     "react-dev-utils": "4.2.1",
     "react-dom": "^16.3.0",
     "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
     "redux": "4.0.0-beta.1",
     "redux-saga": "^0.16.0",
     "redux-saga-router": "^2.2.0",

@@ -1,10 +1,40 @@
 import * as triggers from 'actions/triggers'
 import * as updaters from 'actions/updaters'
-import { put, takeLatest, all } from 'redux-saga/effects'
+import routes from 'routes'
+import createBrowserHistory from 'history/createBrowserHistory'
+const history = createBrowserHistory()
+import {
+  put,
+  takeLatest,
+  all,
+  call,
+  fork
+} from 'redux-saga/effects'
+
+const router = require('redux-saga-router').router
+
+const sagaRoutes = {
+  [routes.home]: function* homeSaga() {
+    console.log('ping')
+    yield put({ type: 'HIT_HOME_ROUTE'})
+  },
+  [routes.zen]: function* zenSaga() {
+    console.log('ping')
+    const zen = yield call(fetch, 'https://api.github.com/zen')
+    yield put({
+      type: 'RECIEVE_ZEN',
+      payload: zen
+    })
+  }
+}
 
 // ------------------------------------
 // Watcher Sagas
 // ------------------------------------
+// function* watchLocationChange() {
+//   console.log('ping')
+//   yield fork(router, history, sagaRoutes)
+// }
 
 function* watchEmitters() {
   yield takeLatest(
@@ -39,4 +69,6 @@ export default function* rootSaga() {
     apllicationInit(),
     watchUserActions()
   ])
+  
+  yield fork(router, history, sagaRoutes)
 }

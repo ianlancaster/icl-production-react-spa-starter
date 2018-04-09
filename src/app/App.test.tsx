@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import App from './App.container'
+import App from './App.component'
 import {} from 'jest'
 
 it('renders without crashing', () => {

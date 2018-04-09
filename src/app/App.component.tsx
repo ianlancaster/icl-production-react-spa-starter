@@ -1,46 +1,25 @@
 import * as React from 'react'
 import * as styles from './App.styles.scss'
+import routes from 'routes'
 import { logoSpin } from './App.animations'
-import { Button } from 'material-ui'
+import { Routes } from 'routes'
+import { Link } from 'react-router-dom'
 
 const logo = require('assets/images/logo.svg')
 
-export interface Props {
-  clickIncrementButton: (details: ActionDetails) => Action,
-  counter: number
-}
-
-class App extends React.Component<Props, object> {
+class App extends React.Component {
   render() {
-    const { clickIncrementButton, counter } = this.props
-
     return (
       <div className={styles.app}>
         <header className={styles.header}>
-          <img
-            src={logo}
-            className={styles.logo}
-            style={{ ...logoSpin }}
-            alt='logo'
-          />
+          <img src={logo} className={styles.logo} style={{ ...logoSpin }} alt='logo' />
           <h1 className={styles.title}>Welcome to React</h1>
+          <nav className={styles.nav}>
+            <Link style={{ padding: 10}} to={routes.home}>Home</Link>
+            <Link style={{ padding: 10}} to={routes.zen}>Zen</Link>
+          </nav>
         </header>
-        <Button
-          variant='raised'
-          color='primary'
-          onClick={() => clickIncrementButton({
-            payload: counter + 1,
-            context: { route: '/' }
-          })}
-          style={{ margin: 20 }}
-        >
-          helllloooo
-        </Button>
-        <p className={styles.intro}>
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-          <br />
-          You have clicked the button {counter} times.
-        </p>
+        <Routes />
       </div>
     )
   }

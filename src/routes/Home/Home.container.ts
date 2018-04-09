@@ -1,4 +1,4 @@
-import App from './App.component'
+import Home from './Home.component'
 import { Action } from 'redux'
 import { StoreState } from 'types'
 import { connect, Dispatch } from 'react-redux'
@@ -13,4 +13,4 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
     dispatch(clickIncrementButton(details))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
