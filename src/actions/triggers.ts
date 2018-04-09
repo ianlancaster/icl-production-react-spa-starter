@@ -1,10 +1,11 @@
-const triggers = {
-  CLICK_INCREMENT_BUTTON: 'CLICK_INCREMENT_BUTTON'
-}
+export const CLICK_INCREMENT_BUTTON = 'CLICK_INCREMENT_BUTTON'
+export const EMIT_APP_INIT = 'EMIT_APP_INIT'
 
-export default triggers
-
-export const CLICK_INCREMENT_BUTTON = (payload: number) => ({
-  type: triggers.CLICK_INCREMENT_BUTTON,
+export const clickIncrementButton: ActionCreator = (payload: number) => ({
+  type: CLICK_INCREMENT_BUTTON,
   payload
+})
+
+export const emitAppInit: ActionCreator = () => ({
+  type: EMIT_APP_INIT
 })

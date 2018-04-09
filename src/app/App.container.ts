@@ -1,13 +1,15 @@
-import { connect } from 'react-redux'
 import App from './App.component'
-import { CLICK_INCREMENT_BUTTON } from 'actions/triggers'
+import { Action } from 'redux'
+import { StoreState } from 'types'
+import { connect, Dispatch } from 'react-redux'
+import { clickIncrementButton } from 'actions/triggers'
 
-const mapStateToProps = (state: any, ownProps: any) => ({
+const mapStateToProps = (state: StoreState) => ({
   counter: state.counter
 })
 
-const mapDispatchToProps = {
-  CLICK_INCREMENT_BUTTON
-}
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
+  clickIncrementButton: (payload: number) => dispatch(clickIncrementButton(payload))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

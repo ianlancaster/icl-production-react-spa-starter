@@ -1,10 +1,7 @@
-const updaters = {
-  UPDATE_COUNTER: 'UPDATE_COUNTER'
-}
+export const UPDATE_COUNTER = 'UPDATE_COUNTER'
 
-export default updaters
-
-export const UPDATE_COUNTER = (action: any) => ({
-  type: updaters.UPDATE_COUNTER,
+export const updateCounter: ActionCreator =
+(payload: number, action: Action) => ({
+  type: UPDATE_COUNTER,
   payload: action.payload
 })

@@ -3,7 +3,7 @@ import colors from './colors'
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: colors.primaryRed }
+    primary: { main: colors.primary }
   },
   typography: {
     fontFamily: 'Futura Bold,Roboto,Helvetica Neue,Arial,sans-serif'

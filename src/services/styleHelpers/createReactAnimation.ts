@@ -1,9 +1,20 @@
-import stringHash from 'string-hash'
 import checkCssProp from './checkCssProp'
+const stringHash = require('string-hash')
 
 // TODO: memoize all the things
 
-const createReactAnimation = keyframes => {
+declare global {
+  interface StyleSheet {
+    insertRule: Function,
+    cssRules: any
+  }
+
+  interface Document {
+    animationRegistry?: Array<string>
+  }
+}
+
+const createReactAnimation = (keyframes: string): string => {
   if (!document.styleSheets[0]) {
     const head = document.head || document.getElementsByTagName('head')[0]
     const style = document.createElement('style')
@@ -16,43 +27,48 @@ const createReactAnimation = keyframes => {
 
   const insertAnimation = () => {
     if (checkCssProp('-webkit-animation')) {
-      styleSheet.insertRule(`
-        @-webkit-keyframes ${encodedName} {
+      styleSheet.insertRule(
+        `@-webkit-keyframes ${encodedName} {
           ${keyframes}
-        }
-      `, styleSheet.cssRules.length)
+          }
+        `,
+        styleSheet.cssRules.length)
     }
 
     if (checkCssProp('-moz-animation')) {
-      styleSheet.insertRule(`
-        @-moz-keyframes ${encodedName} {
+      styleSheet.insertRule(
+      `@-moz-keyframes ${encodedName} {
           ${keyframes}
         }
-      `, styleSheet.cssRules.length)
+      `,
+      styleSheet.cssRules.length)
     }
 
     if (checkCssProp('-o-animation')) {
-      styleSheet.insertRule(`
-        @-o-keyframes ${encodedName} {
-          ${keyframes}
-        }
-      `, styleSheet.cssRules.length)
+      styleSheet.insertRule(
+        `@-o-keyframes ${encodedName} {
+            ${keyframes}
+          }
+        `,
+        styleSheet.cssRules.length)
     }
 
     if (checkCssProp('-ms-animation')) {
-      styleSheet.insertRule(`
-        @-ms-keyframes ${encodedName} {
-          ${keyframes}
-        }
-      `, styleSheet.cssRules.length)
+      styleSheet.insertRule(
+        `@-ms-keyframes ${encodedName} {
+            ${keyframes}
+          }
+        `,
+        styleSheet.cssRules.length)
     }
 
     if (checkCssProp('animation')) {
-      styleSheet.insertRule(`
-        @keyframes ${encodedName} {
-          ${keyframes}
-        }
-      `, styleSheet.cssRules.length)
+      styleSheet.insertRule(
+        `@keyframes ${encodedName} {
+            ${keyframes}
+          }
+        `,
+        styleSheet.cssRules.length)
     }
   }
 

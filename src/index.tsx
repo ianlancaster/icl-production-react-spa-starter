@@ -6,9 +6,9 @@ import { MuiThemeProvider } from 'material-ui/styles'
 
 import 'styles/index.scss'
 import App from 'app'
+import store from 'app/store'
 import theme from 'styles/materialTheme'
 import registerServiceWorker from 'services/cache/registerServiceWorker'
-import store from 'app/store'
 
 const entryPoint = document.querySelector('#root')
 

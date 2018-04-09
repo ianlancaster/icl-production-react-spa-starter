@@ -1,12 +1,10 @@
 import createSagaMiddleware from 'redux-saga'
-import createHistory from 'history/createBrowserHistory'
 import { createStore, applyMiddleware, compose } from 'redux'
 
 import rootSaga from 'sagas'
 import stateTree from './stateTree'
 import { StoreState } from 'types'
 
-export const history = createHistory()
 const sagaMiddleware = createSagaMiddleware()
 
 const enhancers = []
@@ -27,9 +25,9 @@ const composedEnhancers = compose(
   ...enhancers
 )
 
-const store = createStore<StoreState, any, any>(
+const store = createStore<StoreState, Action, any>(
   stateTree,
-  composedEnhancers
+  composedEnhancers,
 )
 
 sagaMiddleware.run(rootSaga)

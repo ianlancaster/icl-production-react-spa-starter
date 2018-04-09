@@ -1,26 +1,22 @@
-import { call, put, takeLatest, throttle, all, select } from 'redux-saga/effects'
-import triggers from 'actions/triggers';
-import { UPDATE_COUNTER } from 'actions/updaters';
-
+import * as triggers from 'actions/triggers'
+import { updateCounter } from 'actions/updaters'
+import { put, takeLatest, all } from 'redux-saga/effects'
 
 // ------------------------------------
 // Watcher Sagas
 // ------------------------------------
 
-function* watchLocationChange() {
-  yield takeLatest('LOCATION_CHANGE',
-    yield action => all([])
-  )
-}
-
 function* watchEmitters() {
-  yield takeLatest('EMIT_APP_INIT', yield action => all([]))
+  yield takeLatest(
+    triggers.EMIT_APP_INIT,
+    yield (action: Action) => all([]))
 }
 
 function* watchUserActions() {
-  yield takeLatest(triggers.CLICK_INCREMENT_BUTTON,
-    yield action => all([
-      updateCounter(action)
+  yield takeLatest(
+    triggers.CLICK_INCREMENT_BUTTON,
+    yield (action: Action) => all([
+      put(updateCounter(action.payload, action))
     ])
   )
 }
@@ -30,12 +26,7 @@ function* watchUserActions() {
 // ------------------------------------
 
 function* apllicationInit() {
-  yield put({ type: 'EMIT_APP_INIT' })
-}
-
-function* updateCounter(action) {
-  console.log('action : in worker saga : ', action)
-  yield put(UPDATE_COUNTER(action))
+  yield put(triggers.emitAppInit())
 }
 
 // -----------------------------------------------------------------------------
