@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {
-  Route,
+  Route as BaseRoute,
   Redirect,
   RouteProps
 } from 'react-router-dom'
@@ -11,20 +11,31 @@ import {
 
 const routes = {
   home: '/',
-  zen: '/zen/'
+  zen: '/zen/:param'
 }
 
-// Use the Page component for any routes that do not have parameters.
+// Use the Dir component for any routes that do not have parameters.
 // It will enforce the trailing slash needed for self pruning state tree
 // to work.
 
-const Page = (props: RouteProps) => (
-  <Route
+const Dir = (props: RouteProps) => (
+  <BaseRoute
     path={props.path}
     exact={true}
     render={renderProps => renderProps.location.pathname.slice(-1) === '/' ?
-      <Route {...renderProps} component={props.component} /> :
+      <BaseRoute {...renderProps} component={props.component} /> :
       <Redirect to={routes.zen} />
+    }
+  />
+)
+
+const Route = (props: RouteProps) => (
+  <BaseRoute
+    path={props.path}
+    exact={true}
+    render={renderProps => renderProps.location.pathname.slice(-1) === '/' ?
+    <Redirect to={renderProps.location.pathname.slice(0, -1)} /> :
+    <BaseRoute {...renderProps} component={props.component} />
     }
   />
 )
@@ -34,8 +45,8 @@ export default routes
 export const Routes = () => {
   return (
     <div>
-      <Page path={routes.home} component={require('./Home').default} />
-      <Page path={routes.zen} component={require('./Zen').default} />
+      <Dir path={routes.home} component={require('./Home').default} />
+      <Route path={`${routes.zen}:param`} component={require('./Zen').default} />
     </div>
   )
 }

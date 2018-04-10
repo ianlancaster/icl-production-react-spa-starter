@@ -1,8 +1,9 @@
 import * as triggers from 'actions/triggers'
 import * as updaters from 'actions/updaters'
 import { replaceReducer } from 'app/store'
+import { pruneStateTree } from 'app/stateTree'
 import { put, takeLatest, all } from 'redux-saga/effects'
-import appReducer, { pruneStateTree } from 'app/stateTree'
+import { genRouterAdditions } from 'services/redux-action-context'
 
 // ------------------------------------
 // Watcher Sagas
@@ -11,7 +12,11 @@ import appReducer, { pruneStateTree } from 'app/stateTree'
 function* watchLocationChange() {
   yield takeLatest(
     triggers.LOCATION_CHANGE,
-    pruneStateTreeWorker
+    function* (action: Action) {
+      const routerAdditions = yield genRouterAdditions(action)
+      yield pruneStateTreeWorker(routerAdditions, action)
+      yield augmentRouterState(routerAdditions, action)
+    }
   )
 }
 
@@ -38,9 +43,18 @@ function* apllicationInit() {
   yield put(triggers.emitAppInit())
 }
 
-function* pruneStateTreeWorker(action: Action) {
-  yield replaceReducer(appReducer)
-  yield replaceReducer(pruneStateTree(action.payload.pathname))
+function* augmentRouterState(routerAdditions: any, action: Action) {
+  yield put(updaters.augmentRouterState({ payload: routerAdditions, action }))
+}
+
+function* pruneStateTreeWorker(routerAdditions: any, action: Action) {
+  yield (() => {
+    console.log('test this arrow function shinanagins') 
+  })()
+  yield (() => {
+    console.log('replacing reducer')
+    replaceReducer(pruneStateTree(routerAdditions.route))
+  })()
 }
 
 // -----------------------------------------------------------------------------

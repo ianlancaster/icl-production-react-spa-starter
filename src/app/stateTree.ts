@@ -3,9 +3,9 @@ import { routerReducer } from 'react-router-redux'
 
 import routes from 'routes'
 import App from 'app/App.reducer'
-import Home from 'routes/Home/Home.reducer'
 import Zen from 'routes/Zen/Zen.reducer'
-import { extractRoute } from 'services/redux-action-context'
+import Home from 'routes/Home/Home.reducer'
+import routerAumentation from 'routes/router.reducer'
 
 // The state tree mirrors our routing structure. This is an important part of
 // the pattern we are using. Application scoped state is stored in the 'App'
@@ -52,14 +52,18 @@ const branches = {
 }
 
 const appState = {
-  router: routerReducer,
+  router: (state: any, action: Action) => {
+    const initialState = routerReducer(state, action)
+    return routerAumentation(initialState, action)
+  },
   App
 }
 
 const reducer = combineReducers(appState)
 
-export const pruneStateTree = (pathname: string) => {
-  const { route } = extractRoute(pathname)
+export const pruneStateTree = (route: string) => {
+  console.log('route :  : ', route)
+  console.log('branches[route] :  : ', branches[route])
   return combineReducers({
     ...appState,
     ...branches[route]
