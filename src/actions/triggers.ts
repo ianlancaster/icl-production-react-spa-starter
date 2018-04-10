@@ -5,3 +5,6 @@ export const clickIncrementButton = createTrigger(CLICK_INCREMENT_BUTTON)
 
 export const EMIT_APP_INIT = 'EMIT_APP_INIT'
 export const emitAppInit: ActionCreator = createTrigger(EMIT_APP_INIT)
+
+export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE'
+// action dispatched by router

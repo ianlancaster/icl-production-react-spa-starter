@@ -5,7 +5,6 @@ import routes from 'routes'
 import App from 'app/App.reducer'
 import Home from 'routes/Home/Home.reducer'
 import Zen from 'routes/Zen/Zen.reducer'
-import routerAumentation from 'routes/router.reducer'
 import { extractRoute } from 'services/redux-action-context'
 
 // The state tree mirrors our routing structure. This is an important part of
@@ -53,14 +52,11 @@ const branches = {
 }
 
 const appState = {
-  router: (state: any, action: Action) => {
-    const initialState = routerReducer(state, action)
-    return routerAumentation(initialState, action)
-  },
+  router: routerReducer,
   App
 }
 
-// const reducer = combineReducers(appState)
+const reducer = combineReducers(appState)
 
 export const pruneStateTree = (pathname: string) => {
   const { route } = extractRoute(pathname)
@@ -70,11 +66,11 @@ export const pruneStateTree = (pathname: string) => {
   })
 }
 
-const stateTree = combineReducers({
-  App,
-  router: routerReducer,
-  Home,
-  Zen
-})
+// const stateTree = combineReducers({
+//   App,
+//   router: routerReducer,
+//   Home,
+//   Zen
+// })
 
-export default stateTree
+export default reducer

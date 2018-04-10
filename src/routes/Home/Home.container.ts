@@ -3,7 +3,7 @@ import { connect, Dispatch } from 'react-redux'
 import { clickIncrementButton } from 'actions/triggers'
 
 const mapStateToProps = (state: any) => ({
-  counter: state.counter
+  counter: state.route.counter
 })
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
