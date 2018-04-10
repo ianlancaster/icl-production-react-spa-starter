@@ -1,17 +1,19 @@
 import createSagaMiddleware from 'redux-saga'
+import createHistory from 'history/createBrowserHistory'
+import { routerMiddleware } from 'react-router-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 
 import rootSaga from 'sagas'
 import stateTree from './stateTree'
-import { StoreState } from 'types'
 
 const sagaMiddleware = createSagaMiddleware()
+export const history = createHistory()
 
-const enhancers = []
 const middleware = [
-  sagaMiddleware
+  sagaMiddleware,
+  routerMiddleware(history)
 ]
-
+const enhancers = []
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.devToolsExtension
 
@@ -25,7 +27,7 @@ const composedEnhancers = compose(
   ...enhancers
 )
 
-const store = createStore<StoreState, Action, any>(
+const store = createStore<any>(
   stateTree,
   composedEnhancers,
 )

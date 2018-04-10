@@ -1,10 +1,8 @@
 import Home from './Home.component'
-import { Action } from 'redux'
-import { StoreState } from 'types'
 import { connect, Dispatch } from 'react-redux'
 import { clickIncrementButton } from 'actions/triggers'
 
-const mapStateToProps = (state: StoreState) => ({
+const mapStateToProps = (state: any) => ({
   counter: state.counter
 })
 

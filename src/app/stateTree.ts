@@ -1,70 +1,80 @@
-// import { combineReducers } from 'redux'
-// import { routerReducer } from 'react-router-redux'
-// import routes from 'routes'
-// import { extractRoute } from 'services/redux-action-context'
-// import app from 'app/app.reducer'
-// import routerAumentation from 'routes/router.reducer'
-// import Inventory from 'routes/Inventory/Inventory.reducer'
-// import FacetedSearch from 'components/FacetedSearch/FacetedSearch.reducer'
-// import Error from 'components/Error/Error.reducer'
+import { combineReducers } from 'redux'
+import { routerReducer } from 'react-router-redux'
 
-// // The state tree mirrors our routing structure. This is an important part of
-// // the pattern we are using. Application scoped state is stored in the 'app'
-// // branch. Redux connected component state is nested withing the rout branches.
+import routes from 'routes'
+import App from 'app/App.reducer'
+import Home from 'routes/Home/Home.reducer'
+import Zen from 'routes/Zen/Zen.reducer'
+import routerAumentation from 'routes/router.reducer'
+import { extractRoute } from 'services/redux-action-context'
 
-// // Your route state will be spread with the app state on location change
-// // ensuring that you are only ever working with and updating the state
-// // that is in scope.
+// The state tree mirrors our routing structure. This is an important part of
+// the pattern we are using. Application scoped state is stored in the 'App'
+// branch. This is where you will store any part of the store state that you
+// want to persist across route changes.
 
-// // If a route uses the same redux connected component, make sure to use a
-// // reducer creator that takes in a route parameter to change the context of
-// // actions it subscribes to. The mapStateToProps function in this component's
-// // container will also need to be route aware to access the correct state entry
+// Every route branch of the state tree will have a 'route' prop that
+// corresponds to that routes reducer. This is where you should store any
+// route scoped state.
 
-// const stateTree = {
-//   [routes['/inventory/']]: {
-//     route: Inventory,
-//     FacetedSearch,
-//     Error
-//   }
+// Redux connected component state is nested in the route branches.
+// Said differently, each route branch will contain a reducer for any redux
+// connected components used on the route.
+
+// When you load the application for the first time or change route, a
+// LOCATION_CHANGE action is fired by redux-router with the target route as
+// the payload. This information is used to identify and active to correct
+// branch of the state tree.
+
+// Using redux's replaceReducer utility, the route state is spread along side
+// the app state on location change. Ensuring that you are only ever working
+// with and updating the state that is in scope.
+
+// The result of this is an application state that is very clean. It only ever
+// has the information that you are using, and it only runs the reducers for
+// that info. Selectors are much more portable, route context and concerns about
+// affecting state out of scope is no longer an issue, and the state is
+// structured in a tierd approach that allows for great flexibility.
+
+// interface StoreState {
+//   app?: any, // apllication scoped state
+//   router?: any, // current routing information
+//   route?: any, // route scoped state
+//   [x: string]: any // state for redux connected components
 // }
 
-// const appState = {
-//   router: (state, action) => {
-//     const initialState = routerReducer(state, action)
-//     return routerAumentation(initialState, action)
-//   },
-//   app
-// }
+const branches = {
+  [routes.home]: {
+    route: Home
+  },
+  [routes.zen]: {
+    route: Zen
+  }
+}
+
+const appState = {
+  router: (state: any, action: Action) => {
+    const initialState = routerReducer(state, action)
+    return routerAumentation(initialState, action)
+  },
+  App
+}
 
 // const reducer = combineReducers(appState)
 
-// export const pruneStateTree = pathname => {
-//   const { route } = extractRoute(pathname)
-//   return combineReducers({
-//     ...appState,
-//     ...stateTree[route]
-//   })
-// }
-
-// export default reducer
-
-import * as updaters from 'actions/updaters'
-import { StoreState } from 'types'
-
-const initialState = {
-  counter: 0
+export const pruneStateTree = (pathname: string) => {
+  const { route } = extractRoute(pathname)
+  return combineReducers({
+    ...appState,
+    ...branches[route]
+  })
 }
 
-export default (state: StoreState = initialState, action: Action) => {
-  switch (action.type) {
-    case updaters.UPDATE_COUNTER:
-      return {
-        ...state,
-        counter: action.payload,
-      }
+const stateTree = combineReducers({
+  App,
+  router: routerReducer,
+  Home,
+  Zen
+})
 
-    default:
-      return state
-  }
-}
+export default stateTree
