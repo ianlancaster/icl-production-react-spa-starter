@@ -4,8 +4,11 @@ export const createTrigger = _createTrigger
 import _createUpdater from './createUpdater'
 export const createUpdater = _createUpdater
 
-import _extractRoute from './extractRoute'
-export const extractRoute = _extractRoute
-
 import _genRouterAdditions from './genRouterAdditions'
 export const genRouterAdditions = _genRouterAdditions
+
+import _checkContext from './checkContext'
+export const checkContext = _checkContext
+
+import _createContext from './createContext'
+export const createContext = _createContext

@@ -2,10 +2,9 @@ import * as React from 'react'
 import { Route, Dir, newRoute } from 'services/better-routes'
 
 // Make sure to add the trailing '/' to the route bases here.
-
 const routes = {
   home: '/',
-  zen: newRoute('/zen/', 'test')
+  zen: newRoute('/zen/', 'zenParam')
 }
 
 export const Routes = () => {
