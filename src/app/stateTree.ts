@@ -46,35 +46,26 @@ const branches = {
   [routes.home]: {
     route: Home
   },
-  [routes.zen]: {
+  [routes.zen()]: {
     route: Zen
   }
 }
 
 const appState = {
+  app: App,
   router: (state: any, action: Action) => {
     const initialState = routerReducer(state, action)
     return routerAumentation(initialState, action)
-  },
-  App
+  }
 }
 
 const reducer = combineReducers(appState)
 
 export const pruneStateTree = (route: string) => {
-  console.log('route :  : ', route)
-  console.log('branches[route] :  : ', branches[route])
   return combineReducers({
     ...appState,
     ...branches[route]
   })
 }
-
-// const stateTree = combineReducers({
-//   App,
-//   router: routerReducer,
-//   Home,
-//   Zen
-// })
 
 export default reducer

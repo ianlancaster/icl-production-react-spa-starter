@@ -6,9 +6,13 @@ const genRouterAdditions = (action: Action) => {
   const routeNames = Object.keys(routes)
   for (let i = 0; i < routeNames.length; i++) {
     const route = routeNames[i]
-    const pathname = action.payload.pathname 
-    if (!!matchPath(pathname, { path: routes[route], exact: true })) {
-      res = { routeName: route, route: routes[route] }
+    let path: any = routes[route]
+    if (typeof path === 'function' && !(path instanceof Array)) {
+      path = path()
+    }
+    const pathname = action.payload.pathname
+    if (!!matchPath(pathname, { path, exact: true })) {
+      res = { routeName: route, route: path }
       if (pathname.slice(-1) !== '/') {
         const pathParts = pathname.split('/')
         res = {

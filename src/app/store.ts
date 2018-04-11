@@ -9,11 +9,29 @@ import stateTree from './stateTree'
 const sagaMiddleware = createSagaMiddleware()
 export const history = createHistory()
 
+const customMiddleWare = (currentStore: any) => (next: any) => (action: any): any => {
+  const state = currentStore.getState()
+  let nextAction = action
+  if (state.router && state.router.route) {
+    nextAction = {
+      ...action,
+      context: {
+        route: state.router.route,
+        ...action.context
+      }
+    }
+  }
+  next(nextAction)
+}
+
 const middleware = [
+  customMiddleWare,
   sagaMiddleware,
   routerMiddleware(history)
 ]
+
 const enhancers = []
+
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.devToolsExtension
 

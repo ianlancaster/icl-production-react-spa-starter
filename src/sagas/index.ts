@@ -48,13 +48,7 @@ function* augmentRouterState(routerAdditions: any, action: Action) {
 }
 
 function* pruneStateTreeWorker(routerAdditions: any, action: Action) {
-  yield (() => {
-    console.log('test this arrow function shinanagins') 
-  })()
-  yield (() => {
-    console.log('replacing reducer')
-    replaceReducer(pruneStateTree(routerAdditions.route))
-  })()
+  yield replaceReducer(pruneStateTree(routerAdditions.route))
 }
 
 // -----------------------------------------------------------------------------
