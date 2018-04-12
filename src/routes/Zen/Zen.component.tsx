@@ -1,14 +1,20 @@
 import * as React from 'react'
+import { Button } from 'material-ui'
 
 class Zen extends React.Component<any, object> {
-  renderTest = () => (<h2>test</h2>)
-
   render() {
-    const Test = this.renderTest
+    const { zen, clickButton } = this.props
     return (
       <div>
-        <p>AAHHHHHHHHH</p>
-        <Test />
+        <Button
+          variant='raised'
+          color='primary'
+          onClick={() => clickButton()}
+          style={{ margin: 20 }}
+        >
+          Fetch Zen
+        </Button>
+        <p>{zen}</p>
       </div>
     )
   }

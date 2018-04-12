@@ -7,6 +7,9 @@ export const createTrigger = _createTrigger
 import _createUpdater from './createUpdater'
 export const createUpdater = _createUpdater
 
+import _context from './context'
+export const context = _context
+
 export interface RouterAdditions {
   routeName: string,
   route: string,

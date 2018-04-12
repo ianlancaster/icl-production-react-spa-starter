@@ -1,5 +1,5 @@
-import * as updaters from 'actions/updaters'
 import routes from 'routes'
+import * as updaters from 'actions/updaters'
 import { createContext } from 'services/redux-action-context'
 
 const initialState = {
@@ -10,10 +10,16 @@ export default (state = initialState, action: Action) => {
   const checkRouteContext = createContext({ route: routes.zen() })
 
   switch (checkRouteContext(action)) {
-    case updaters.UPDATE_COUNTER:
+    case updaters.SET_COUNTER:
       return {
         ...state,
         counter: action.payload,
+      }
+
+    case updaters.SET_ZEN:
+      return {
+        ...state,
+        zen: action.payload
       }
 
     default:
