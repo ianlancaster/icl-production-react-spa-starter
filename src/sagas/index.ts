@@ -14,7 +14,6 @@ function* watchLocationChange() {
     triggers.LOCATION_CHANGE,
     function* (action: Action) {
       const routerAdditions = yield genRouterAdditions(action)
-      console.log('routerAdditions :  : ', routerAdditions)
       yield pruneStateTreeWorker(routerAdditions, action)
       yield augmentRouterState(routerAdditions, action)
     }

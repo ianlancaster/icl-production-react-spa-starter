@@ -7,7 +7,6 @@ const initialState = {
 export default (state = initialState, action: Action) => {
   switch (action.type) {
     case updaters.UPDATE_COUNTER:
-      console.log('action.payload :  : ', action.payload)
       return {
         ...state,
         counter: action.payload,

@@ -7,28 +7,22 @@ export interface Props {
   counter: number
 }
 
-class Home extends React.Component<Props, object> {
-  render() {
-    const { clickIncrementButton, counter } = this.props
-
-    return (
-      <div>
-        <Button
-          variant='raised'
-          color='primary'
-          onClick={() => clickIncrementButton({ payload: counter + 1 })}
-          style={{ margin: 20 }}
-        >
-          helllloooo
-        </Button>
-        <p className={styles.intro}>
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-          <br />
-          You have clicked the button {counter} times.
-        </p>
-      </div>
-    )
-  }
-}
+const Home = ({ clickIncrementButton, counter }: Props) => (
+  <div>
+    <Button
+      variant='raised'
+      color='primary'
+      onClick={() => clickIncrementButton({ payload: counter + 1 })}
+      style={{ margin: 20 }}
+    >
+      helllloooo
+    </Button>
+    <p className={styles.intro}>
+      To get started, edit <code>src/App.tsx</code> and save to reload.
+      <br />
+      You have clicked the button {counter} times.
+    </p>
+  </div>
+)
 
 export default Home
