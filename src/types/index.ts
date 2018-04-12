@@ -20,11 +20,11 @@ declare global {
 
   interface ActionDetails {
     payload?: any
-    context?: object
+    context?: OpenObject
   }
   
   interface Action extends ReduxAction, ActionDetails {
-    trigger?: object
+    trigger?: Action
   }
 
   interface ActionCreator extends ReduxActionCreator<Action> {}

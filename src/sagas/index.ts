@@ -1,4 +1,3 @@
-import routes from 'routes'
 import * as triggers from 'actions/triggers'
 import * as updaters from 'actions/updaters'
 import { replaceReducer } from 'app/store'
@@ -35,7 +34,6 @@ function* watchUserActions() {
 
   yield takeLatest(
     context(triggers.CLICK_BUTTON, {
-      route: routes.zen(),
       name: 'fetch zen'
     }),
     yield (action: Action) => fetchZen(action)
@@ -62,7 +60,8 @@ function* fetchZen(action: Action) {
   yield put(updaters.setFetching({ payload: true, action }))
   const res = yield call(fetch, 'http://api.github.com/zen')
   const zen = yield res.text()
-  yield put(updaters.setZen({ payload: zen, action, context: { route: routes.zen() }}))
+  const ac = action.context || {}
+  yield put(updaters.setZen({ payload: zen, action, context: { route: ac.route }}))
   yield put(updaters.setFetching({ payload: false, action }))
 }
 

@@ -4,6 +4,7 @@ import { routerReducer, RouterState } from 'react-router-redux'
 import routes from 'routes'
 import App from 'app/App.reducer'
 import Zen from 'routes/Zen/Zen.reducer'
+import Zen2 from 'routes/Zen2/Zen2.reducer'
 import Home from 'routes/Home/Home.reducer'
 import routerAumentation from 'routes/router.reducer'
 
@@ -40,6 +41,9 @@ const branches = {
   },
   [routes.zen()]: {
     route: Zen
+  },
+  [routes.zen2()]: {
+    route: Zen2
   }
 }
 

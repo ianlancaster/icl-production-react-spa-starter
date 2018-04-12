@@ -3,11 +3,11 @@ import * as updaters from 'actions/updaters'
 import { createContext } from 'services/redux-action-context'
 
 const initialState = {
-  zen: `Don't sweat the petty things`
+  zen: `Don't pet the sweaty things`
 }
 
 export default (state = initialState, action: Action) => {
-  const checkRouteContext = createContext({ route: routes.zen() })
+  const checkRouteContext = createContext({ route: routes.zen2() })
 
   switch (checkRouteContext(action)) {
     case updaters.SET_COUNTER:

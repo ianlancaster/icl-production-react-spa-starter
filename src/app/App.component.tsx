@@ -17,6 +17,7 @@ class App extends React.Component {
           <nav className={styles.nav}>
             <Link style={{ padding: 10}} to={routes.home}>Home</Link>
             <Link style={{ padding: 10}} to={routes.zen('test')}>Zen</Link>
+            <Link style={{ padding: 10}} to={routes.zen2('test')}>Zen2</Link>
           </nav>
         </header>
         <Routes />
