@@ -1,6 +1,6 @@
+- Replace all anys with types and interfaces.
 - Implement the zen api call.
 - Abstract counter into component with reducer creator shared between routes to demonstrate proper redux-action context usage.
-- Replace all anys with types and interfaces.
 - Add annotations to non-obvious services.
 - Add exlusions, or, and regex to context options.
 - Investigate dispatching actions on react ref renders to benchmark render performance in the redux dev tools.

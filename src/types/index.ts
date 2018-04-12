@@ -3,14 +3,20 @@ import {
   ActionCreator as ReduxActionCreator
 } from 'redux'
 
-export interface StoreState {
-  counter: number
-}
-
 declare global {
   interface Window {
     devToolsExtension: Function
   }
+
+  interface OpenObject {
+    [x: string]: any
+  }
+
+  interface StoreState extends OpenObject {
+    app?: OpenObject, // apllication scoped state
+    router?: OpenObject, // current routing information
+    route: OpenObject // route scoped state
+  }  
 
   interface ActionDetails {
     payload?: any

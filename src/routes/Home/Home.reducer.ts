@@ -1,13 +1,13 @@
 import * as updaters from 'actions/updaters'
-import { StoreState } from 'types'
 
 const initialState = {
   counter: 0
 }
 
-export default (state: StoreState = initialState, action: Action) => {
+export default (state = initialState, action: Action) => {
   switch (action.type) {
     case updaters.UPDATE_COUNTER:
+      console.log('action.payload :  : ', action.payload)
       return {
         ...state,
         counter: action.payload,

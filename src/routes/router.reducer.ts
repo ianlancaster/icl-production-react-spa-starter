@@ -1,6 +1,10 @@
 import * as updaters from 'actions/updaters'
 
-export default (state: any, action: Action) => {
+const initialState = {
+  location: {}
+}
+
+export default (state: OpenObject = initialState, action: Action) => {
   switch (action.type) {
     case updaters.AUGMENT_ROUTER_STATE:
       return {

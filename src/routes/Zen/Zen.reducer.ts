@@ -6,7 +6,7 @@ const initialState = {
   zen: ''
 }
 
-export default (state: any = initialState, action: Action) => {
+export default (state = initialState, action: Action) => {
   const checkRouteContext = createContext({ route: routes.zen() })
 
   switch (checkRouteContext(action)) {

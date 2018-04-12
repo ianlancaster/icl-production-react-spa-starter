@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { routerReducer } from 'react-router-redux'
+import { routerReducer, RouterState } from 'react-router-redux'
 
 import routes from 'routes'
 import App from 'app/App.reducer'
@@ -8,7 +8,7 @@ import Home from 'routes/Home/Home.reducer'
 import routerAumentation from 'routes/router.reducer'
 
 // The state tree mirrors our routing structure. This is an important part of
-// the pattern we are using. Application scoped state is stored in the 'App'
+// the pattern we are using. Application scoped state is stored in the 'app'
 // branch. This is where you will store any part of the store state that you
 // want to persist across route changes.
 
@@ -31,16 +31,8 @@ import routerAumentation from 'routes/router.reducer'
 
 // The result of this is an application state that is very clean. It only ever
 // has the information that you are using, and it only runs the reducers for
-// that info. Selectors are much more portable, route context and concerns about
-// affecting state out of scope is no longer an issue, and the state is
+// that info. Selectors are much more portable, and the state is
 // structured in a tierd approach that allows for great flexibility.
-
-// interface StoreState {
-//   app?: any, // apllication scoped state
-//   router?: any, // current routing information
-//   route?: any, // route scoped state
-//   [x: string]: any // state for redux connected components
-// }
 
 const branches = {
   [routes.home]: {
@@ -53,8 +45,8 @@ const branches = {
 
 const appState = {
   app: App,
-  router: (state: any, action: Action) => {
-    const initialState = routerReducer(state, action)
+  router: (state: RouterState, action: Action) => {
+    const initialState: OpenObject = routerReducer(state, action)
     return routerAumentation(initialState, action)
   }
 }

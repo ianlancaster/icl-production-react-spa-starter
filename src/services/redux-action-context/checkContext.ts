@@ -1,6 +1,6 @@
 // TODO: add support for 'or', exclude, and regex in context
 
-const checkContext = (action: Action, context: any) => {
+const checkContext = (action: Action, context: OpenObject) => {
   if (!context || !Object.keys(context).length) return action.type
   if (!action.context || !Object.keys(action.context).length) return
   const contextKeys = Object.keys(context)

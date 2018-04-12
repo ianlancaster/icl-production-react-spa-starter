@@ -5,9 +5,9 @@ import { Route as BaseRoute, Redirect, RouteProps } from 'react-router-dom'
  * Use to create a function that will return the defined router path
  * if called without any params, and returns an instance of that route
  * when a param is passed in. If you need to store more than one param
- * in the URL, please use search parameters.
+ * in the URL, consider useing search parameters.
  */
-export const newRoute = (path: string, paramName: string) => (param?: string) =>
+export const newRoute = (path: string, paramName: string) => (param?: string): string =>
   param ? `${path}${param}` : `${path}:${paramName}`
 
 /**

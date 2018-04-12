@@ -6,7 +6,7 @@ const stringHash = require('string-hash')
 declare global {
   interface StyleSheet {
     insertRule: Function,
-    cssRules: any
+    cssRules: CSSRuleList
   }
 
   interface Document {

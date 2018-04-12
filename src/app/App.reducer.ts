@@ -2,7 +2,7 @@
 
 const initialState = {}
 
-export default (state: any = initialState, action: Action) => {
+export default (state = initialState, action: Action) => {
   switch (action.type) {
     default:
       return state

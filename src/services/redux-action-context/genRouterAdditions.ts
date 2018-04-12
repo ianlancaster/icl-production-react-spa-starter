@@ -1,23 +1,23 @@
 import routes from 'routes'
 import { matchPath } from 'react-router'
+import { RouterAdditions } from './'
 
-const genRouterAdditions = (action: Action) => {
-  let res
+const genRouterAdditions = (action: Action): RouterAdditions => {
+  let res = { route: '', routeName: '', path: '', param: '' }
   const routeNames = Object.keys(routes)
   for (let i = 0; i < routeNames.length; i++) {
     const route = routeNames[i]
-    let path: any = routes[route]
-    if (typeof path === 'function' && !(path instanceof Array)) {
-      path = path()
-    }
+    const recievedPath: string|Function = routes[route]
+    const path: string = (typeof recievedPath === 'function' && !(recievedPath instanceof Array))
+      ? recievedPath() : recievedPath
     const pathname = action.payload.pathname
     if (!!matchPath(pathname, { path, exact: true })) {
-      res = { routeName: route, route: path }
+      res = { ...res, routeName: route, route: path }
       if (pathname.slice(-1) !== '/') {
-        const pathParts = pathname.split('/')
+        const pathParts: string[] = pathname.split('/')
         res = {
           ...res,
-          param: pathParts[pathParts.length - 1]
+          param: pathParts[pathParts.length - 1] || ''
         }
       }
       break
